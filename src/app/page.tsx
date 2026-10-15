@@ -1,69 +1,118 @@
-import Image from "next/image";
+import { GlassFold } from "@/components/GlassFold";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main className="relative w-screen h-screen overflow-hidden bg-[#06081e] text-white">
+      {/* Background WebGL Shader */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <GlassFold
+          color1="#1e3cc8"
+          color2="#06081e"
+          color3="#96d7ff"
+          speed={0.5}
+          scale={1}
+          noise={0.12}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+      </div>
+
+      {/* Foreground UI overlay replicating the GradFlow showcase layout */}
+      <div className="relative z-10 flex flex-col justify-between h-full p-8 sm:p-12 pointer-events-none select-none">
+        {/* Top bar controls / mock actions */}
+        <div className="flex items-center gap-2 pointer-events-auto">
+          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 text-white/80">
+            <button
+              type="button"
+              className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+              title="Fullscreen"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+              title="Theme toggle"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+              title="Randomize"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+              </svg>
+            </button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Bottom bar */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pointer-events-auto">
+          <div className="max-w-md space-y-1">
+            <h1 className="text-3xl sm:text-4xl font-normal tracking-tight text-white drop-shadow-md">
+              Glass fold
+            </h1>
+            <p className="text-sm sm:text-base text-white/70 font-light drop-shadow">
+              One of twenty WebGL shaders from GradFlow. Three colors, no dependencies.
+            </p>
+          </div>
+
+          <div>
+            <a
+              href="https://gradflow.meerbahadin.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs sm:text-sm text-white/90 bg-white/10 hover:bg-white/15 border border-white/20 backdrop-blur-md rounded-full transition-all shadow-lg hover:border-white/30"
+            >
+              <span>gradflow.meerbahadin.dev</span>
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
+            </a>
+          </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
